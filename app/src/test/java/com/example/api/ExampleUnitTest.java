@@ -1,4 +1,4 @@
-package com.example.tallerservicio;
+package com.example.api;
 
 import org.junit.Test;
 
