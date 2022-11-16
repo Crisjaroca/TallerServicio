@@ -22,7 +22,6 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Objetos a usar
     ListView usuariosList;
     Button agregarUserBtn;
 
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         context = this;
 
-        cargarUsuario(-1);
+        cargarUsuario(0);
 
         agregarUserBtn.setOnClickListener(v -> {
             intent = new Intent(context, Create.class);
@@ -61,28 +60,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void cargarUsuario(int id) {
-        Call<InfoResponse> respInfo = (new InfoServices().getInfoService());
-        respInfo.enqueue(new Callback<InfoResponse>() {
+        Call<InfoResponse> inforesponse = (new InfoServices().getInfoService());
+        inforesponse.enqueue(new Callback<InfoResponse>() {
             @Override
             public void onResponse(Call<InfoResponse> call, Response<InfoResponse> response) {
                 Log.i("Info", "Conexión Establecida");
                 listaUsuarios = new ArrayList<>();
-                InfoResponse r = response.body();
-                for (int i = 0; i < r.data.size(); i++) {
+                InfoResponse respon = response.body();
+                for (int i = 0; i < respon.data.size(); i++) {
                     if (id == -1) {
                         user = new InfoApi(
-                                r.data.get(i).getId(),
-                                r.data.get(i).getNames(),
-                                r.data.get(i).getUsername(),
-                                r.data.get(i).getRol()
+                                respon.data.get(i).getId(),
+                                respon.data.get(i).getNames(),
+                                respon.data.get(i).getUsername(),
+                                respon.data.get(i).getRol()
                         );
                         listaUsuarios.add(user.toString());
-                    } else if (r.data.get(i).getId() == id) {
+                    } else if (respon.data.get(i).getId() == id) {
                         user = new InfoApi(
-                                r.data.get(i).getId(),
-                                r.data.get(i).getNames(),
-                                r.data.get(i).getUsername(),
-                                r.data.get(i).getRol()
+                                respon.data.get(i).getId(),
+                                respon.data.get(i).getNames(),
+                                respon.data.get(i).getUsername(),
+                                respon.data.get(i).getRol()
                         );
                         listaUsuarios.add(user.toString());
                     }

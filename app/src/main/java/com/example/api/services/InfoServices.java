@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class InfoServices {
     private Retrofit getRetrofit() {
         return new Retrofit.Builder()
-                .baseUrl("http://192.168.101.72/")
+                .baseUrl("http://192.168.1.20:8080/api/users")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
